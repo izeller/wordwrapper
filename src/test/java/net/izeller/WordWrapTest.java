@@ -19,6 +19,12 @@ public class WordWrapTest {
        assertThat(wrap("hola TDD", 5), is("hola\nTDD"));
     }
     public String wrap(String line, int lengthLine){
-    	return line;
+    	
+    	if(line.length()>lengthLine){
+    		return line.replace(" ", "\n");
+    	}else{
+    		return line;	
+    	}
+    	
     }
 }
