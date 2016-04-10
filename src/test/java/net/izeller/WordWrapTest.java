@@ -44,7 +44,7 @@ public class WordWrapTest {
     		if(indexOfSpace<0){
     			return wrappedLine(line, lengthLine)+
     					"\n"+
-    					notWrappedLine(line, lengthLine-1);
+    					wrap(notWrappedLine(line, lengthLine-1), lengthLine);
     		}
     		return wrappedLine(line, indexOfSpace)+
     				"\n"+
