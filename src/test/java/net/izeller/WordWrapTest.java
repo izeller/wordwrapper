@@ -31,14 +31,28 @@ public class WordWrapTest {
     public String wrap(String line, int lengthLine){
     	
     	if(line.length()>lengthLine){
-    		int indexOfSpace = line.indexOf(" ", lengthLine-1);
-    		return line.substring(0, indexOfSpace)+
+    		int indexOfSpace = indexOfFirstSpace(line, lengthLine);
+    		
+    		return wrappedLine(line, indexOfSpace)+
     				"\n"+
-    				line.substring(indexOfSpace+1);
+    				wrap(notWrappedLine(line, indexOfSpace), lengthLine);
     	}else{
     		return line;	
     	}
     	
     }
+    
+    private String notWrappedLine(String line, int indexOfSpace) {
+		return line.substring(indexOfSpace+1);
+	}
+
+	private String wrappedLine(String line, int indexOfSpace) {
+		return line.substring(0, indexOfSpace);
+	}
+
+	private int indexOfFirstSpace(String line, int lengthLine) {
+		return line.indexOf(" ", lengthLine-1);
+	}
+
 
 }
