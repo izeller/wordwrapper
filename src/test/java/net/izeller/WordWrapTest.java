@@ -29,14 +29,18 @@ public class WordWrapTest {
     }
     
     @Test
-    public void split_word_in_two_lines(){
+    public void split_one_word_in_two_lines(){
     	 assertThat(wrap("holaTDD", 4), is("hola\nTDD"));
     }
     public String wrap(String line, int lengthLine){
     	
     	if(line.length()>lengthLine){
     		int indexOfSpace = indexOfFirstSpace(line, lengthLine);
-    		
+    		if(indexOfSpace<0){
+    			return wrappedLine(line, lengthLine)+
+    					"\n"+
+    					notWrappedLine(line, lengthLine-1);
+    		}
     		return wrappedLine(line, indexOfSpace)+
     				"\n"+
     				wrap(notWrappedLine(line, indexOfSpace), lengthLine);
