@@ -30,8 +30,13 @@ public class WordWrapTest {
     }
     
     @Test
-    public void split_word(){
+    public void split_word_in_two_lines(){
     	 assertThat(wrap("holaTDD", 4), is("hola\nTDD"));
+    }
+    
+    @Test
+    public void split_word_in_three_lines(){
+    	 assertThat(wrap("holaTDD", 3), is("hol\naTD\nD"));
     }
     
     public String wrap(String line, int lengthLine){
