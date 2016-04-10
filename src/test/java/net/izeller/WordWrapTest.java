@@ -11,7 +11,7 @@ public class WordWrapTest {
 
 	@Test 
 	public void enough_length_line() {
-		assertThat(wrap("hola", 5), is("hola"));
+		assertThat(wrap("hola", 5, true), is("hola"));
 	}
 
 	@Test 
@@ -37,22 +37,30 @@ public class WordWrapTest {
 	public void split_one_word_in_many_lines(){
 		assertThat(wrap("holaTDD", 2), is("ho\nla\nTD\nD"));
 	}
-	
+
 	@Test
 	public void split_word_and_spaces(){
 		assertThat(wrap("hola TDD", 3), is("hol\na\nTDD"));
 	}
 
-	public String wrap(String line, int lengthLine){
+
+	private String wrap(String line, int lengthLine) {
+		
+		return wrap(line, lengthLine, true);
+	}
+
+	public String wrap(String line, int lengthLine, boolean findFirstSpaceWithOffset){
+		
 		if(enoughSpace(line, lengthLine)){
 			return line;
 		}
 
-		int indexOfSpace = indexOfFirstSpace(line, lengthLine);
-		if(indexOfSpace<0 ){
+		int indexOfSpace = indexOfFirstSpace(line, lengthLine, findFirstSpaceWithOffset);
+		findFirstSpaceWithOffset = indexOfSpace<=lengthLine;
+		if(indexOfSpace<0 || !findFirstSpaceWithOffset){
 			return wrappedLine(line, lengthLine)+
 					"\n"+
-					wrap(notWrappedLine(line, lengthLine-1), lengthLine);
+					wrap(notWrappedLine(line, lengthLine-1), lengthLine, findFirstSpaceWithOffset);
 		}
 		return wrappedLine(line, indexOfSpace)+
 				"\n"+
@@ -74,8 +82,12 @@ public class WordWrapTest {
 		return line.substring(0, indexOfSpace);
 	}
 
-	private int indexOfFirstSpace(String line, int lengthLine) {
-		return line.indexOf(" ", lengthLine-1);
+	private int indexOfFirstSpace(String line, int lengthLine, boolean findFirstSpaceWithOffset) {
+		if(findFirstSpaceWithOffset){
+			return line.indexOf(" ", lengthLine-1);
+		}else{
+			return line.indexOf(" ");
+		}
 	}
 
 
