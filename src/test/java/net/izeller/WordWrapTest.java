@@ -18,6 +18,12 @@ public class WordWrapTest {
     public void split_two_words() {
        assertThat(wrap("hola TDD", 5), is("hola\nTDD"));
     }
+    
+    @Test 
+    public void split_three_words_in_two_lines() {
+       assertThat(wrap("hola TDD wordWrap", 8), is("hola TDD\nwordWrap"));
+    }
+    
     public String wrap(String line, int lengthLine){
     	
     	if(line.length()>lengthLine){
