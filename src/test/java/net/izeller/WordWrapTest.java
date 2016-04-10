@@ -38,6 +38,11 @@ public class WordWrapTest {
     	
     	if(line.length()>lengthLine){
     		int indexOfSpace = indexOfFirstSpace(line, lengthLine);
+    		if(indexOfSpace<0){
+    			return wrappedLine(line, lengthLine)+
+    					"\n"+
+    					notWrappedLine(line, lengthLine-1);
+    		}
     		return wrappedLine(line, indexOfSpace)+
     				"\n"+
     				wrap(notWrappedLine(line, indexOfSpace), lengthLine);
