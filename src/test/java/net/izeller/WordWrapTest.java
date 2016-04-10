@@ -26,7 +26,7 @@ public class WordWrapTest {
     
     @Test 
     public void split_three_words_in_three_lines() {
-       assertThat(wrap("hola TDD wordWrap", 4), is("hola TDD\nwordWrap"));
+       assertThat(wrap("hola TDD word", 4), is("hola\nTDD\nword"));
     }
     
     public String wrap(String line, int lengthLine){
@@ -35,7 +35,7 @@ public class WordWrapTest {
     		int indexOfSpace = indexOfFirstSpace(line, lengthLine);
     		return wrappedLine(line, indexOfSpace)+
     				"\n"+
-    				notWrappedLine(line, indexOfSpace);
+    				wrap(notWrappedLine(line, indexOfSpace), lengthLine);
     	}else{
     		return line;	
     	}
