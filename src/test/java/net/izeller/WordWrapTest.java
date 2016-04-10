@@ -15,6 +15,6 @@ public class WordWrapTest {
     }
     
     public String wrap(String line, int lengthLine){
-    	return null;
+    	return line;
     }
 }
