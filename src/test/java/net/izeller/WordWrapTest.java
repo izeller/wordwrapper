@@ -14,6 +14,10 @@ public class WordWrapTest {
        assertThat(wrap("hola", 5), is("hola"));
     }
     
+    @Test 
+    public void split_two_words() {
+       assertThat(wrap("hola TDD", 5), is("hola\nTDD"));
+    }
     public String wrap(String line, int lengthLine){
     	return line;
     }
