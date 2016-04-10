@@ -27,10 +27,14 @@ public class WordWrapTest {
     public String wrap(String line, int lengthLine){
     	
     	if(line.length()>lengthLine){
-    		return line.replace(" ", "\n");
+    		int indexOfSpace = line.indexOf(" ", lengthLine-1);
+    		return line.substring(0, indexOfSpace)+
+    				"\n"+
+    				line.substring(indexOfSpace+1);
     	}else{
     		return line;	
     	}
     	
     }
+
 }
